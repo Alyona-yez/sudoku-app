@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { saveBestTime, saveGameResult } from '../utils/storage';
+import type { Difficulty } from '../features/sudoku/types';
 
 // Головоломки для разных уровней сложности
 const PUZZLES = {
@@ -37,8 +38,6 @@ const PUZZLES = {
     [null, null, 7, null, null, null, null, 5, null],
   ],
 };
-
-type Difficulty = 'easy' | 'medium' | 'hard';
 
 const checkConflicts = (
   board: (number | null)[][],

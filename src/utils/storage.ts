@@ -1,10 +1,4 @@
-export type Difficulty = 'easy' | 'medium' | 'hard';
-
-export interface GameResult {
-  date: string;
-  time: number;
-  difficulty: Difficulty;
-}
+import type { Difficulty, GameResult } from '../features/sudoku/types';
 
 const BEST_TIME_KEY = 'sudoku_best_time';
 const HISTORY_KEY = 'sudoku_history';

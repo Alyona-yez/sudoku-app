@@ -1,6 +1,5 @@
 import './DifficultySelector.css';
-
-export type Difficulty = 'easy' | 'medium' | 'hard';
+import type { Difficulty } from '../../features/sudoku/types';
 
 interface DifficultySelectorProps {
   currentDifficulty: Difficulty;
