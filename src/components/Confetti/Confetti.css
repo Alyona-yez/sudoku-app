@@ -1,0 +1,67 @@
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.confetti-particle {
+  position: absolute;
+  border-radius: 50% 20% 50% 20%;
+  opacity: 0.8;
+  animation-name: fall-sway;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  filter: blur(0.5px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Анимация падения с покачиванием */
+@keyframes fall-sway {
+  0% {
+    transform: translateY(0) rotate(0deg) translateX(0);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateY(25vh) rotate(90deg) translateX(5vw);
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg) translateX(-5vw);
+  }
+  75% {
+    transform: translateY(75vh) rotate(270deg) translateX(3vw);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg) translateX(0);
+    opacity: 0;
+  }
+}
+
+/* Альтернативная форма для некоторых частиц (лепестки) */
+.confetti-particle:nth-child(3n) {
+  border-radius: 40% 60% 40% 60% / 60% 40% 60% 40%;
+}
+
+.confetti-particle:nth-child(5n) {
+  border-radius: 20% 80% 20% 80% / 80% 20% 80% 20%;
+}
+
+/* Увеличенные частицы для разнообразия */
+.confetti-particle:nth-child(7n) {
+  width: calc(var(--size, 10px) * 1.5) !important;
+  height: calc(var(--size, 10px) * 1.5) !important;
+}
+
+/* Медленное падение для некоторых */
+.confetti-particle:nth-child(2n) {
+  animation-duration: calc(var(--duration, 4s) * 1.5);
+}
+
+/* Быстрое падение для других */
+.confetti-particle:nth-child(4n) {
+  animation-duration: calc(var(--duration, 4s) * 0.7);
+}

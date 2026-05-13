@@ -1,0 +1,315 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #f4dae9 0%, #ffc6ec 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Сакура — падающие лепестки */
+body::before {
+  content: "🌸🌸🌸";
+  position: fixed;
+  top: -50px;
+  left: 0;
+  right: 0;
+  font-size: 24px;
+  text-align: center;
+  pointer-events: none;
+  animation: fall 12s linear infinite;
+  white-space: nowrap;
+  opacity: 0.6;
+  letter-spacing: 20px;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Декоративные ветки сакуры по углам */
+body::after {
+  content: "🌸";
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 32px;
+  color: rgba(255, 182, 193, 0.3);
+  pointer-events: none;
+  animation: sway 3s ease-in-out infinite;
+  transform-origin: top right;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.game-container {
+  background: rgba(255, 248, 245, 0.97);
+  border-radius: 24px;
+   padding: 80px 50px 40px 50px; 
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  position: relative;
+  border: 1px solid rgba(255, 182, 193, 0.3);
+  backdrop-filter: blur(2px);
+}
+
+/* Ветка сакуры в левом верхнем углу контейнера */
+.game-container::before {
+  content: "🌿🌸";
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  font-size: 45px;
+  opacity: 0.4;
+  transform: rotate(-15deg);
+  pointer-events: none;
+}
+
+/* Правый нижний угол */
+.game-container::after {
+  content: "🌸🌿";
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  font-size: 45px;
+  opacity: 0.4;
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+
+.game-title {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 700;
+  color: #e91e63;
+  margin: 0 0 8px 0;
+  letter-spacing: 4px;
+  text-shadow: 2px 2px 6px rgba(233, 30, 99, 0.1);
+}
+
+.game-title::before {
+  content: "✦";
+  font-size: 20px;
+  color: #ffb6c1;
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.game-title::after {
+  content: "✦";
+  font-size: 20px;
+  color: #ffb6c1;
+  position: absolute;
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 8px;
+  color: #d4a0b0;
+  margin-bottom: 25px;
+  font-weight: 300;
+  margin-top: 0;      
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
+}
+
+.new-game-btn {
+  background: linear-gradient(135deg, #e91e63 0%, #ff6b9d 100%);
+  color: white;
+  border: none;
+  padding: 12px 35px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.new-game-btn::before {
+  content: "🌸";
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.new-game-btn:hover::before {
+  left: 15px;
+  opacity: 1;
+}
+
+.new-game-btn::after {
+  content: "🌸";
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.new-game-btn:hover::after {
+  right: 15px;
+  opacity: 1;
+}
+
+.new-game-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(233, 30, 99, 0.4);
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.win-message {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #e91e63;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 1px;
+  animation: fadeIn 0.8s ease;
+  background: linear-gradient(135deg, #e91e63, #ff6b9d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Тёмная тема */
+body.dark-theme {
+  background: linear-gradient(135deg, #3c001e 0%, #5a0028 100%);
+}
+
+body.dark-theme::before {
+  color: rgba(255, 182, 193, 0.4);
+}
+
+body.dark-theme::after {
+  color: rgba(255, 182, 193, 0.5);
+}
+
+.dark-theme .game-container {
+  background: rgba(40, 0, 20, 0.95);
+  border-color: rgba(255, 105, 180, 0.4);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+.dark-theme .game-title {
+  color: #ffb6c1;
+  text-shadow: 2px 2px 6px rgba(255, 182, 193, 0.3);
+}
+
+.dark-theme .game-title::before,
+.dark-theme .game-title::after {
+  color: #ff6b9d;
+}
+
+.dark-theme .subtitle {
+  color: #d4a0b0;
+}
+
+.dark-theme .best-time {
+  color: #ffb6c1;
+  background: rgba(255, 182, 193, 0.1);
+  border-radius: 8px;
+  padding: 6px 12px;
+  display: inline-block;
+}
+
+.dark-theme .new-game-btn {
+  background: linear-gradient(135deg, #9c1b5a 0%, #c2185b 100%);
+  box-shadow: 0 4px 15px rgba(156, 27, 90, 0.4);
+}
+
+.dark-theme .new-game-btn:hover {
+  box-shadow: 0 6px 25px rgba(156, 27, 90, 0.6);
+}
+
+.dark-theme .new-game-btn::before,
+.dark-theme .new-game-btn::after {
+  color: #ffb6c1;
+}
+
+.dark-theme .win-message {
+  background: linear-gradient(135deg, #ffb6c1, #ff6b9d);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Адаптивность */
+@media (max-width: 700px) {
+  .game-container {
+    padding: 20px 25px;
+  }
+  
+  .cell {
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 16px !important;
+  }
+  
+  .game-title {
+    font-size: 24px;
+  }
+}
+

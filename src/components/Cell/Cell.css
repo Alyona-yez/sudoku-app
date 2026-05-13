@@ -1,0 +1,85 @@
+.cell {
+  width: 70px;
+  height: 70px;
+  border: 2px solid #333333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: normal;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  transition: background-color 0.2s;
+}
+
+.cell-initial {
+  background-color: #fadfe6;
+  font-weight: bold;
+  cursor: default;
+}
+
+.cell-invalid {
+  background-color: #ffcccc !important;
+  color: #cc0000;
+}
+
+.cell-selected {
+  background-color: #f08fc1;
+  border: 2px solid #feaccf;
+}
+
+.cell-highlighted {
+  background-color: #e6f7ff;
+}
+
+.cell:hover:not(.cell-initial) {
+  background-color: #f5f5f5;
+}
+
+/* Толстые границы для блоков 3x3 — усиленный вариант */
+.cell:nth-child(3n) {
+  border-right: 4px solid #52061f;
+}
+
+.board-row:nth-child(3n) .cell {
+  border-bottom: 4px solid #45071c;
+}
+
+/* Тёмная тема для клеток */
+.dark-theme .cell {
+  background-color: #2a0014;
+  border-color: #5a0028;
+  color: #ffb6c1;
+}
+
+.dark-theme .cell-initial {
+  background-color: #4a001f;
+  color: #ff6b9d;
+  font-weight: bold;
+}
+
+.dark-theme .cell-invalid {
+  background-color: #7a002f !important;
+  color: #ffcccc;
+}
+
+.dark-theme .cell-selected {
+  background-color: #9c1b5a;
+  border-color: #ff6b9d;
+}
+
+.dark-theme .cell-highlighted {
+  background-color: #3c001e;
+}
+
+.dark-theme .cell:hover:not(.cell-initial) {
+  background-color: #5a0028;
+}
+
+.dark-theme .cell:nth-child(3n) {
+  border-right-color: #ff6b9d;
+}
+
+.dark-theme .board-row:nth-child(3n) .cell {
+  border-bottom-color: #ff6b9d;
+}

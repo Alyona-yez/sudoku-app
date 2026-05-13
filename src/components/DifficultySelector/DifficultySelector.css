@@ -1,0 +1,55 @@
+.difficulty-selector {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin: 30px 0 20px 0;
+}
+
+.difficulty-btn {
+  background: #f5f0ea;
+  border: 2px solid #e0d5c5;
+  padding: 12px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: inherit;
+}
+
+.difficulty-emoji {
+  font-size: 24px;
+}
+
+.difficulty-btn:hover {
+  background: #ffe4ec;
+  transform: translateY(-2px);
+}
+
+.difficulty-btn.active {
+  background: linear-gradient(135deg, #e91e63 0%, #ff8da1 100%);
+  color: white;
+  border-color: #e91e63;
+  box-shadow: 0 2px 10px rgba(233, 30, 99, 0.3);
+}
+
+/* Тёмная тема для выбора сложности */
+.dark-theme .difficulty-btn {
+  background: #3c001e;
+  border-color: #5a0028;
+  color: #ffb6c1;
+}
+
+.dark-theme .difficulty-btn:hover {
+  background: #5a0028;
+  transform: translateY(-2px);
+}
+
+.dark-theme .difficulty-btn.active {
+  background: linear-gradient(135deg, #ff6b9d 0%, #c2185b 100%);
+  border-color: #ff6b9d;
+  box-shadow: 0 2px 10px rgba(255, 105, 180, 0.4);
+}

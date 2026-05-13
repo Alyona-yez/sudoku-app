@@ -1,0 +1,95 @@
+.timer-container {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0 35px 0;
+  padding: 15px 0;
+  background: rgba(255, 248, 245, 0.9);
+  border-radius: 80px;
+}
+
+.timer-display {
+  background: linear-gradient(135deg, #fff0f3 0%, #ffe4ec 100%);
+  padding: 15px 40px;
+  border-radius: 60px;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.2);
+}
+
+.timer-display::before {
+  content: "⏱️";
+  position: absolute;
+  left: -35px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 28px;
+}
+
+.timer-label {
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #c9a0b0;
+  margin-right: 18px;
+  font-weight: 600;
+}
+
+.timer-value {
+  font-size: 48px;
+  font-weight: 700;
+  font-family: 'Inter', monospace;
+  background: linear-gradient(135deg, #e91e63 0%, #ff6b9d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 3px;
+}
+
+.timer-reset {
+  background: #ffe4ec;
+  color: #e91e63;
+  border: none;
+  padding: 8px 22px;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.timer-reset:hover {
+  background: #e91e63;
+  color: white;
+  transform: scale(1.02);
+}
+
+/* Тёмная тема для таймера */
+.dark-theme .timer-container {
+  background: rgba(40, 0, 20, 0.8);
+}
+
+.dark-theme .timer-display {
+  background: linear-gradient(135deg, #3c001e 0%, #5a0028 100%);
+  box-shadow: 0 2px 10px rgba(255, 105, 180, 0.2);
+}
+
+.dark-theme .timer-label {
+  color: #d4a0b0;
+}
+
+.dark-theme .timer-value {
+  background: linear-gradient(135deg, #ffb6c1 0%, #ff6b9d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.dark-theme .timer-reset {
+  background: #5a0028;
+  color: #ffb6c1;
+}
+
+.dark-theme .timer-reset:hover {
+  background: #ff6b9d;
+  color: #2a0014;
+}
