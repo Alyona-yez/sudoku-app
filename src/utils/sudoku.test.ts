@@ -46,11 +46,11 @@ describe('Sudoku Logic', () => {
     [null, null, null, 4, 1, 9, null, null, 5],
     [null, null, null, null, 8, null, null, 7, 9],
   ];
-
+  
   it('должен отклонить число 3 в позиции (0,0) — конфликт в строке', () => {
     expect(checkConflicts(board, 0, 0, 3)).toBe(true);
   });
-
+  
   it('должен принять число 4 в позиции (0,2) — конфликтов нет', () => {
     expect(checkConflicts(board, 0, 2, 4)).toBe(false);
   });

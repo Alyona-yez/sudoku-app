@@ -42,7 +42,7 @@ describe('storage', () => {
     it('сохраняет время, getBestTime его возвращает', () => {
       const difficulty: Difficulty = 'easy';
       const seconds = 120;
-
+      
       saveBestTime(difficulty, seconds);
       const retrieved = getBestTime(difficulty);
 
@@ -62,7 +62,7 @@ describe('storage', () => {
       const retrieved = getBestTime(difficulty);
       expect(retrieved).toBe(bestTime); // Осталось лучшее время
     });
-
+    
     it('возвращает null, если рекорда нет', () => {
       const difficulty: Difficulty = 'hard';
       const retrieved = getBestTime(difficulty);
@@ -79,15 +79,15 @@ describe('storage', () => {
       expect(getBestTime('medium')).toBe(200);
       expect(getBestTime('hard')).toBe(300);
     });
-
+    
     it('перезаписывает рекорд, если новое время лучше', () => {
       const difficulty: Difficulty = 'easy';
       saveBestTime(difficulty, 200);
       saveBestTime(difficulty, 150); // Лучшее время
-
+      
       expect(getBestTime(difficulty)).toBe(150);
     });
-
+    
     it('обрабатывает ошибку localStorage (возвращает null)', () => {
       // Симулируем ошибку при чтении localStorage
       const getItemSpy = vi.spyOn(localStorage, 'getItem').mockImplementation(() => {
@@ -97,7 +97,7 @@ describe('storage', () => {
       const result = getBestTime('easy');
       expect(result).toBeNull();
       expect(console.error).toHaveBeenCalled();
-
+      
       getItemSpy.mockRestore();
     });
   });
