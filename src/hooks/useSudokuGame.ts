@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { saveBestTime, saveGameResult } from '../utils/storage';
 import type { Difficulty } from '../features/sudoku/types';
 
@@ -121,8 +121,9 @@ export const useSudokuGame = (onError?: (message: string) => void) => {
   const [hasStarted, setHasStarted] = useState(false);
   const [finalSeconds, setFinalSeconds] = useState<number | null>(null);
 
-  const initialBoard: boolean[][] = board.map((row) =>
-    row.map((cell) => cell !== null)
+  const initialBoard: boolean[][] = useMemo(() =>
+    board.map((row) => row.map((cell) => cell !== null)),
+    [board]
   );
 
   /**
