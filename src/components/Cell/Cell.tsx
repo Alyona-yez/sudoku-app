@@ -1,4 +1,5 @@
 import './Cell.css';
+import React from 'react';
 
 interface CellProps {
   value: number | null;
@@ -41,4 +42,4 @@ const Cell = ({
   );
 };
 
-export default Cell;
+export default React.memo(Cell);
