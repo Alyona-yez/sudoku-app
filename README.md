@@ -46,6 +46,22 @@ src/
 ├── App.css
 └── main.tsx
 
+## Архитектура приложения
+
+### Компонентная иерархия
+
+App
+├── DifficultySelector
+├── Timer
+├── GameBoard
+│   └── Cell (рендерится 81 раз)
+├── VictoryModal
+└── Toast (уведомления)
+
+### Потоки данных
+
+Клик по ячейке → handleCellClick → setSelectedCell → ввод с клавиатуры → setValue → checkConflicts → обновление board/conflicts → перерендер GameBoard
+
 ## Функциональные возможности
 
 Игровое поле 9x9 с разделением на блоки 3x3

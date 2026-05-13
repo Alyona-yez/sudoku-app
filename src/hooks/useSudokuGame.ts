@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { saveBestTime, saveGameResult } from '../utils/storage';
 import type { Difficulty } from '../features/sudoku/types';
 
@@ -103,7 +103,7 @@ export const useSudokuGame = (onError?: (message: string) => void) => {
     row.map((cell) => cell !== null)
   );
 
-  const loadPuzzle = (diff: Difficulty) => {
+  const loadPuzzle = useCallback((diff: Difficulty) => {
     setDifficulty(diff);
     const newBoard = JSON.parse(JSON.stringify(PUZZLES[diff]));
     setBoard(newBoard);
@@ -114,11 +114,11 @@ export const useSudokuGame = (onError?: (message: string) => void) => {
     setIsTimerRunning(false);
     setTimerResetTrigger(prev => prev + 1);
     setFinalSeconds(null);
-  };
+  }, []);
 
-  const handleDifficultyChange = (diff: Difficulty) => {
+  const handleDifficultyChange = useCallback((diff: Difficulty) => {
     loadPuzzle(diff);
-  };
+  }, [loadPuzzle]);
 
   const finishGame = (seconds: number) => {
     if (!isGameWon) return;
@@ -156,11 +156,11 @@ export const useSudokuGame = (onError?: (message: string) => void) => {
     }
   };
 
-  const handleCellClick = (row: number, col: number) => {
+  const handleCellClick = useCallback((row: number, col: number) => {
     if (isGameWon) return;
     if (initialBoard[row][col]) return;
     setSelectedCell({ row, col });
-  };
+  }, [isGameWon, board]);
 
   const updateFinalSeconds = (seconds: number) => {
     setFinalSeconds(seconds);
@@ -186,9 +186,9 @@ export const useSudokuGame = (onError?: (message: string) => void) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedCell]);
 
-  const resetGame = () => {
+  const resetGame = useCallback(() => {
     loadPuzzle(difficulty);
-  };
+  }, [loadPuzzle, difficulty]);
 
   return {
     board,
