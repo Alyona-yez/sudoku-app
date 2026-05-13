@@ -127,7 +127,7 @@ function App() {
             🌸 Новая игра 🌸
           </button>
         </div>
-
+        
         <VictoryModal
           isOpen={showVictoryModal}
           onClose={handleCloseModal}

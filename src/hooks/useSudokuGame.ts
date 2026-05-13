@@ -39,6 +39,15 @@ const PUZZLES = {
   ],
 };
 
+/**
+ * Проверяет, вызывает ли размещение числа в указанной ячейке конфликт.
+ * Проверяет строку, столбец и блок 3x3 на наличие того же числа.
+ * @param board - Двумерный массив 9x9, представляющий текущее состояние доски.
+ * @param row - Индекс строки (0-8).
+ * @param col - Индекс столбца (0-8).
+ * @param value - Число для проверки (1-9).
+ * @returns true, если число уже присутствует в строке, столбце или блоке 3x3, иначе false.
+ */
 const checkConflicts = (
   board: (number | null)[][],
   row: number,
@@ -61,6 +70,12 @@ const checkConflicts = (
   return false;
 };
 
+/**
+ * Вычисляет матрицу конфликтов для всей доски.
+ * Для каждой заполненной ячейки проверяет, вызывает ли её значение конфликт.
+ * @param board - Двумерный массив 9x9, представляющий текущее состояние доски.
+ * @returns Матрицу 9x9 булевых значений, где true означает конфликт в соответствующей ячейке.
+ */
 const getAllConflicts = (board: (number | null)[][]): boolean[][] => {
   const conflicts: boolean[][] = Array(9).fill(null).map(() => Array(9).fill(false));
   for (let row = 0; row < 9; row++) {
@@ -74,6 +89,13 @@ const getAllConflicts = (board: (number | null)[][]): boolean[][] => {
   return conflicts;
 };
 
+/**
+ * Проверяет, выполнены ли условия победы в судоку.
+ * Победа достигается, когда все ячейки заполнены и нет конфликтов.
+ * @param board - Двумерный массив 9x9, представляющий текущее состояние доски.
+ * @param conflicts - Матрица 9x9 булевых значений, указывающая на конфликты в ячейках.
+ * @returns true, если все ячейки заполнены и нет конфликтов, иначе false.
+ */
 const checkWin = (board: (number | null)[][], conflicts: boolean[][]): boolean => {
   for (let row = 0; row < 9; row++) {
     for (let col = 0; col < 9; col++) {
@@ -103,6 +125,12 @@ export const useSudokuGame = (onError?: (message: string) => void) => {
     row.map((cell) => cell !== null)
   );
 
+  /**
+   * Загружает головоломку выбранной сложности и сбрасывает состояние игры.
+   * Обновляет доску, конфликты, выбранную ячейку, таймер и флаги победы/старта.
+   * @param diff - Уровень сложности ('easy', 'medium', 'hard').
+   * @returns Ничего не возвращает.
+   */
   const loadPuzzle = useCallback((diff: Difficulty) => {
     setDifficulty(diff);
     const newBoard = JSON.parse(JSON.stringify(PUZZLES[diff]));
@@ -116,16 +144,38 @@ export const useSudokuGame = (onError?: (message: string) => void) => {
     setFinalSeconds(null);
   }, []);
 
+  /**
+   * Обрабатывает изменение сложности игры.
+   * Вызывает загрузку новой головоломки с указанной сложностью.
+   * @param diff - Уровень сложности ('easy', 'medium', 'hard').
+   * @returns Ничего не возвращает.
+   */
   const handleDifficultyChange = useCallback((diff: Difficulty) => {
     loadPuzzle(diff);
   }, [loadPuzzle]);
 
+  /**
+   * Завершает игру, сохраняя лучший результат и историю игры.
+   * Вызывается только в случае победы (isGameWon === true).
+   * @param seconds - Время завершения игры в секундах.
+   * @returns Ничего не возвращает.
+   */
   const finishGame = (seconds: number) => {
     if (!isGameWon) return;
     saveBestTime(difficulty, seconds);
     saveGameResult(difficulty, seconds);
   };
 
+  /**
+   * Устанавливает значение в указанную ячейку доски.
+   * Проверяет, можно ли изменить ячейку (не исходная, игра не завершена).
+   * Проверяет конфликты, запускает таймер при первом ходе, обновляет доску и конфликты.
+   * Если после установки достигается победа, помечает игру как выигранную и останавливает таймер.
+   * @param row - Индекс строки (0-8).
+   * @param col - Индекс столбца (0-8).
+   * @param num - Число для установки (1-9) или null для очистки ячейки.
+   * @returns Ничего не возвращает.
+   */
   const setValue = (row: number, col: number, num: number | null) => {
     if (isGameWon) return;
     if (initialBoard[row][col]) return;
@@ -156,6 +206,13 @@ export const useSudokuGame = (onError?: (message: string) => void) => {
     }
   };
 
+  /**
+   * Обрабатывает клик по ячейке доски.
+   * Выбирает ячейку для последующего ввода числа, если игра не завершена и ячейка не является исходной.
+   * @param row - Индекс строки (0-8).
+   * @param col - Индекс столбца (0-8).
+   * @returns Ничего не возвращает.
+   */
   const handleCellClick = useCallback((row: number, col: number) => {
     if (isGameWon) return;
     if (initialBoard[row][col]) return;
@@ -186,6 +243,11 @@ export const useSudokuGame = (onError?: (message: string) => void) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedCell]);
 
+  /**
+   * Сбрасывает текущую игру, загружая головоломку той же сложности.
+   * Восстанавливает исходное состояние доски, конфликтов, таймера и флагов.
+   * @returns Ничего не возвращает.
+   */
   const resetGame = useCallback(() => {
     loadPuzzle(difficulty);
   }, [loadPuzzle, difficulty]);
