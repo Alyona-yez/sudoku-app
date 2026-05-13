@@ -31,7 +31,9 @@ export const saveBestTime = (difficulty: Difficulty, seconds: number): void => {
 export const getBestTime = (difficulty: Difficulty): number | null => {
   try {
     const bestTimes = getBestTimes();
-    return bestTimes[difficulty] ?? null;
+    const time = bestTimes[difficulty];
+    // 0 означает отсутствие рекорда
+    return time === 0 ? null : time ?? null;
   } catch (e) {
     console.error('Ошибка получения лучшего времени:', e);
     return null;
